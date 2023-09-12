@@ -4,6 +4,8 @@ const {printTable} = require("console-table-printer");
 const { default: inquirer } = require("inquirer");
 require("dotenv").config();
 
+const figlet = require("figlet");
+
 // create connection
 const db = mysql.createConnection({
     host: "localhost",
@@ -22,3 +24,16 @@ view all departments, view all roles, view all employees, add a department, add 
 function mainMenu(){
     inquirer.prompt()
 }
+
+
+
+
+
+figlet("Employee Manager", function (err, data) {
+  if (err) {
+    console.log("Something went wrong...");
+    console.dir(err);
+    return;
+  }
+  console.log(data);
+});
