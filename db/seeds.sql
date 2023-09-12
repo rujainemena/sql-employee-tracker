@@ -1,13 +1,14 @@
 -- access the db --
 USE employees_db;
 
+-- department table --
 INSERT INTO department (name)
 VALUES ("Sales"), -- id 1
        ("Engineering"), -- id 2
        ("Finance"), -- id 3
        ("Legal"); -- id 4
        
-
+-- job role table --
 INSERT INTO role (title, salary, department_id)
 VALUES ("Sales Lead", 100000, 1), -- id 1
        ("Salesperson", 80000, 1), -- id 2
@@ -18,6 +19,7 @@ VALUES ("Sales Lead", 100000, 1), -- id 1
        ("Legal Team Lead", 250000, 4), -- id 7
        ("Lawyer", 190000, 4); -- id 8
 
+-- employee table --
 INSERT INTO employee (first_name, last_name, role_id)
 VALUES ("John", "Doe", 1), -- id 1
        ("Mike", "Chan", 2), -- id 2

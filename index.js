@@ -97,13 +97,8 @@ function addEmployee() {
 
 function updateEmployee() {
     db.query("SELECT id as value, title as name from role", (err, roleData) => {
-        db.query("SELECT id as value, CONCAT(first_name, ' ', last_name) as name FROM employee WHERE manager_id is null", (err, employeeData) => {
+        db.query("SELECT id as value, CONCAT(first_name, ' ', last_name) as name FROM employee", (err, employeeData) => {
             inquirer.prompt([
-                {
-                    type: "input",
-                    message: "What is the last name?",
-                    name: "last_name"
-                },
                 {
                     type: "list",
                     message: "Select a job title:",
@@ -112,12 +107,12 @@ function updateEmployee() {
                 },
                 {
                     type: "list",
-                    message: "Select a Manager:",
-                    name: "manager_id",
-                    choices: managerData
+                    message: "Select an employee:",
+                    name: "employee_id",
+                    choices: employeeData
                 }
             ]).then(answer => {
-                db.query("INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answer.first_name, answer.last_name, answer.role_id, answer.manager_id], err => {
+                db.query("UPDATE employee SET role_id = ? WHERE id = ?;", [answer.role_id, answer.employee_id], err => {
                     viewEmployee();
                 })
             })
