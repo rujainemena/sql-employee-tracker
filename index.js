@@ -2,18 +2,8 @@ const inquirer = require("inquirer");
 const mysql = require("mysql2");
 const { printTable } = require("console-table-printer");
 require("dotenv").config();
-
-// variable for figlet
-const figlet = require("figlet");
-// EMPLOYEE MANAGER figlet function 
-figlet("Employee Manager", function (err, signData) {
-    if (err) {
-        console.log("Something went wrong...");
-        console.dir(err);
-        return;
-    }
-    console.log(signData);
-});
+// // variable for figlet
+// const figlet = require("figlet");
 
 // create connection //
 const db = mysql.createConnection({
@@ -127,8 +117,6 @@ function addDepartment() {
         })
     })
 };
-
-
 // function to add a new employee //
 function addEmployee() {
     db.query("SELECT id as value, title as name from role", (err, roleData) => {
@@ -189,3 +177,12 @@ function updateEmployee() {
         })
     })
 };
+// // EMPLOYEE MANAGER figlet function 
+// figlet("Employee Manager", function (err, signData) {
+//     if (err) {
+//         console.log("Something went wrong...");
+//         console.dir(err);
+//         return;
+//     }
+//     console.log(signData);
+// });
