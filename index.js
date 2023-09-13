@@ -47,6 +47,9 @@ function mainMenu() {
             } else if (answer.selection === "Add Role") {
                 addRole();
 
+            } else if (answer.selection === "Add Department") {
+                addDepartment();
+
             } else if (answer.selection === "Add Employee") {
                 addEmployee();
 
@@ -61,15 +64,14 @@ function viewDepartments() {
         printTable(allDepartments);
         mainMenu();
     })
-}
-
+};
 // function to view role table //
 function viewRoles() {
     db.query(`SELECT role.id, title, salary, name as department FROM role LEFT JOIN department ON department.id = role.department_id;`, (err, jobRoles) => {
         printTable(jobRoles);
         mainMenu();
     })
-}
+};
 // function to view employee table //
 function viewEmployee() {
     db.query(`SELECT employee.id, employee.first_name, employee.last_name, name as department, salary, CONCAT(supervisor.first_name, " ", supervisor.last_name) as manager FROM employee  
@@ -80,8 +82,7 @@ function viewEmployee() {
         printTable(data);
         mainMenu();
     })
-}
-
+};
 // function to add a new job role //
 function addRole() {
     db.query("SELECT id as value, name from department", (err, departmentData) => {
@@ -109,6 +110,24 @@ function addRole() {
         })
     })
 };
+
+// function to add a new company department //
+function addDepartment() {
+    db.query("SELECT id as value", (err) => {
+        inquirer.prompt([
+            {
+                type: "input",
+                message: "Enter a new department name:",
+                name: "name"
+            },
+        ]).then(answer => {
+            db.query("INSERT INTO department SET ?", answer, err => {
+                viewDepartments();
+            })
+        })
+    })
+};
+
 
 // function to add a new employee //
 function addEmployee() {
